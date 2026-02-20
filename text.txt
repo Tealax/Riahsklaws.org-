@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Riah's Klaws | Mariah Davis – Nail Technician</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --cream: #fdf6f0;
+      --blush: #e8b4be;
+      --rose: #c4718a;
+      --dark-rose: #8b3a52;
+      --mauve: #6b3a4e;
+      --deep: #1c0f14;
+      --gold: #c9953a;
+      --muted: rgba(253,246,240,0.6);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--deep);
+      color: var(--cream);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+    *, *::before, *::after { cursor: none !important; }
+    .cursor-dot {
+      width: 8px; height: 8px;
+      background: var(--blush); border-radius: 50%;
+      position: fixed; pointer-events: none; z-index: 9999;
+      transform: translate(-50%, -50%);
+    }
+    .cursor-ring {
+      width: 32px; height: 32px;
+      border: 1.5px solid rgba(232,180,190,0.5); border-radius: 50%;
+      position: fixed; pointer-events: none; z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease;
+    }
+    .cursor-ring.hovering { width: 52px; height: 52px; border-color: var(--blush); }
+
+```
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.6rem 5rem;
+  background: linear-gradient(to bottom, rgba(28,15,20,0.97) 0%, transparent 100%);
+  transition: background 0.4s, border-bottom 0.4s;
+}
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.7rem; font-weight: 700; color: var(--cream); letter-spacing: 0.06em;
+}
+.nav-logo span { color: var(--blush); font-style: italic; }
+.nav-links { display: flex; gap: 3rem; list-style: none; }
+.nav-links a {
+  font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--muted); text-decoration: none; transition: color 0.3s; position: relative;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -5px; left: 0;
+  width: 0; height: 1px; background: var(--rose); transition: width 0.3s ease;
+}
+.nav-links a:hover { color: var(--cream); }
+.nav-links a:hover::after { width: 100%; }
+.nav-book {
+  background: var(--rose); color: #fff;
+  padding: 0.65rem 1.6rem; border-radius: 1px;
+  font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase;
+  text-decoration: none; transition: background 0.3s, transform 0.2s;
+}
+.nav-book:hover { background: var(--dark-rose); transform: translateY(-2px); }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: grid; grid-template-columns: 1fr 1fr;
+  align-items: center; position: relative; overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 60% 70% at 75% 45%, rgba(196,113,138,0.18) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 15% 70%, rgba(201,149,58,0.10) 0%, transparent 60%);
+}
+.hero-left {
+  position: relative; z-index: 2;
+  padding: 10rem 3rem 6rem 5rem;
+}
+.eyebrow {
+  display: flex; align-items: center; gap: 1rem;
+  font-size: 0.72rem; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 1.6rem;
+}
+.eyebrow::before { content: ''; width: 36px; height: 1px; background: var(--gold); flex-shrink: 0; }
+h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3.8rem, 7vw, 7rem); line-height: 1.0; font-weight: 700; color: var(--cream);
+}
+h1 .italic { font-style: italic; color: var(--blush); display: block; }
+.hero-tagline {
+  margin-top: 1.8rem; font-size: 1rem; font-weight: 300; line-height: 1.75;
+  color: rgba(253,246,240,0.65); max-width: 440px;
+}
+.hero-actions { margin-top: 2.8rem; display: flex; align-items: center; gap: 1.6rem; }
+.btn-primary {
+  background: var(--rose); color: #fff;
+  padding: 1rem 2.2rem; text-decoration: none;
+  font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase;
+  border-radius: 1px; transition: background 0.3s, transform 0.2s; display: inline-block;
+}
+.btn-primary:hover { background: var(--dark-rose); transform: translateY(-2px); }
+.btn-ghost {
+  color: var(--blush); font-size: 0.8rem; letter-spacing: 0.15em;
+  text-transform: uppercase; text-decoration: none;
+  display: inline-flex; align-items: center; gap: 0.6rem; transition: gap 0.3s;
+}
+.btn-ghost:hover { gap: 1rem; }
+.btn-ghost::after { content: '→'; }
+
+.hero-right {
+  position: relative; z-index: 2;
+  display: flex; justify-content: center; align-items: center; height: 100vh;
+}
+.hero-card {
+  width: 360px;
+  background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+  border: 1px solid rgba(232,180,190,0.25);
+  padding: 3rem 2.5rem; position: relative;
+  animation: cardFloat 5s ease-in-out infinite;
+}
+@keyframes cardFloat { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-14px); } }
+.hero-card::before {
+  content: ''; position: absolute; top: -1px; left: 20%; right: 20%; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--blush), transparent);
+}
+.hero-card-emoji { font-size: 3.8rem; display: block; margin-bottom: 1.2rem; }
+.hero-card h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem; font-style: italic; color: var(--blush); margin-bottom: 0.6rem;
+}
+.hero-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
+.divider { width: 40px; height: 1px; background: var(--gold); margin: 1.4rem 0; }
+.hero-stat { display: flex; gap: 2rem; margin-top: 0.5rem; }
+.hero-stat-item { text-align: center; }
+.hero-stat-num {
+  font-family: 'Cormorant Garamond', serif; font-size: 2.2rem;
+  font-weight: 700; color: var(--cream); display: block;
+}
+.hero-stat-label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+.ig-pill {
+  margin-top: 2rem;
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+  padding: 0.6rem 1.1rem; border-radius: 40px;
+  font-size: 0.78rem; color: var(--cream); text-decoration: none; transition: background 0.3s;
+}
+.ig-pill:hover { background: rgba(255,255,255,0.12); }
+
+/* MARQUEE */
+.marquee-wrap {
+  background: var(--rose); padding: 0.9rem 0;
+  overflow: hidden; white-space: nowrap; position: relative; z-index: 10;
+}
+.marquee-track { display: inline-flex; gap: 2.5rem; animation: marquee 22s linear infinite; }
+@keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+.marquee-item {
+  font-size: 0.76rem; letter-spacing: 0.22em; text-transform: uppercase;
+  color: rgba(255,255,255,0.9); display: flex; align-items: center; gap: 2.5rem;
+}
+.marquee-item::after { content: '✦'; color: rgba(255,255,255,0.5); }
+
+/* SECTIONS */
+section { position: relative; z-index: 2; }
+.section-label {
+  font-size: 0.72rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold);
+  display: flex; align-items: center; gap: 1rem; margin-bottom: 1.2rem;
+}
+.section-label::before { content: ''; width: 36px; height: 1px; background: var(--gold); }
+.section-label.centered { justify-content: center; }
+.section-label.centered::before { display: none; }
+h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.4rem, 4.5vw, 3.8rem); font-weight: 700; line-height: 1.1; color: var(--cream);
+}
+h2 em { font-style: italic; color: var(--blush); }
+
+/* ABOUT */
+.about {
+  padding: 7rem 5rem;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+}
+.about-card-main {
+  background: linear-gradient(135deg, rgba(196,113,138,0.12), rgba(201,149,58,0.06));
+  border: 1px solid rgba(232,180,190,0.2); padding: 3.5rem 3rem; position: relative;
+}
+.about-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem; font-style: italic; color: var(--blush); line-height: 1.55; margin-bottom: 1.5rem;
+}
+.about-quote::before { content: '\201C'; font-size: 3rem; color: var(--rose); line-height: 0; vertical-align: -0.6em; margin-right: 0.2rem; }
+.about-attr { font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+.about-float-badge {
+  position: absolute; bottom: -24px; left: -24px;
+  background: var(--deep); border: 1px solid rgba(201,149,58,0.3); padding: 1.2rem 1.6rem;
+}
+.about-float-badge span { font-size: 2rem; display: block; margin-bottom: 0.3rem; }
+.about-float-badge p { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+.about-text { margin-top: 1.6rem; font-size: 0.95rem; line-height: 1.9; color: rgba(253,246,240,0.7); }
+.about-text p + p { margin-top: 1.1rem; }
+
+/* WHY */
+.why {
+  padding: 6rem 5rem;
+  background: linear-gradient(to bottom, transparent, rgba(196,113,138,0.06), transparent);
+}
+.why-header { text-align: center; margin-bottom: 4rem; }
+.why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+.why-card {
+  border: 1px solid rgba(232,180,190,0.15); padding: 2.5rem 2rem;
+  position: relative; overflow: hidden; transition: border-color 0.4s, transform 0.3s;
+}
+.why-card:hover { border-color: rgba(232,180,190,0.4); transform: translateY(-6px); }
+.why-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--rose), transparent);
+  opacity: 0; transition: opacity 0.4s;
+}
+.why-card:hover::before { opacity: 1; }
+.why-icon { font-size: 2.2rem; margin-bottom: 1.2rem; display: block; }
+.why-card h3 {
+  font-family: 'Cormorant Garamond', serif; font-size: 1.4rem;
+  font-weight: 600; color: var(--cream); margin-bottom: 0.8rem;
+}
+.why-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.75; }
+
+/* SERVICES */
+.services { padding: 6rem 5rem; }
+.services-header { margin-bottom: 3.5rem; }
+.services-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+.service-item {
+  display: flex; align-items: flex-start; gap: 1.4rem;
+  border: 1px solid rgba(255,255,255,0.07); padding: 1.8rem 2rem;
+  transition: border-color 0.3s, background 0.3s;
+}
+.service-item:hover { border-color: rgba(232,180,190,0.3); background: rgba(232,180,190,0.04); }
+.service-num {
+  font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 700;
+  color: rgba(196,113,138,0.25); line-height: 1; flex-shrink: 0; width: 40px;
+}
+.service-info h4 {
+  font-family: 'Cormorant Garamond', serif; font-size: 1.25rem;
+  font-weight: 600; color: var(--cream); margin-bottom: 0.4rem;
+}
+.service-info p { font-size: 0.86rem; color: var(--muted); line-height: 1.65; }
+
+/* TESTIMONIALS */
+.testimonials {
+  padding: 6rem 5rem;
+  background: rgba(196,113,138,0.04);
+  border-top: 1px solid rgba(232,180,190,0.1);
+  border-bottom: 1px solid rgba(232,180,190,0.1);
+}
+.testimonials-header { text-align: center; margin-bottom: 3.5rem; }
+.testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+.testi-card {
+  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); padding: 2.2rem;
+}
+.testi-stars { color: var(--gold); font-size: 0.85rem; margin-bottom: 1rem; letter-spacing: 0.2em; }
+.testi-card blockquote {
+  font-family: 'Cormorant Garamond', serif; font-size: 1.1rem;
+  font-style: italic; color: var(--cream); line-height: 1.65; margin-bottom: 1.2rem;
+}
+.testi-name { font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--rose); }
+
+/* INSTAGRAM CTA */
+.ig-section { padding: 6rem 5rem; text-align: center; }
+.ig-section h2 { margin-bottom: 1rem; }
+.ig-section > p { color: var(--muted); margin-bottom: 2.5rem; font-size: 0.95rem; line-height: 1.8; max-width: 500px; margin-left: auto; margin-right: auto; }
+.ig-big-btn {
+  display: inline-flex; align-items: center; gap: 1rem;
+  background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+  color: #fff; padding: 1.1rem 2.8rem; border-radius: 2px; text-decoration: none;
+  font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 500;
+  transition: opacity 0.3s, transform 0.2s;
+}
+.ig-big-btn:hover { opacity: 0.85; transform: translateY(-2px); }
+
+/* CONTACT */
+.contact {
+  padding: 6rem 5rem;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+  border-top: 1px solid rgba(232,180,190,0.1);
+}
+.contact-left h2 { margin-bottom: 1.2rem; }
+.contact-left > p { color: var(--muted); font-size: 0.95rem; line-height: 1.8; margin-bottom: 2rem; }
+.contact-link {
+  display: flex; align-items: center; gap: 1rem;
+  text-decoration: none; color: var(--cream); font-size: 0.9rem;
+  padding: 1rem 1.4rem; border: 1px solid rgba(255,255,255,0.08);
+  transition: border-color 0.3s, background 0.3s;
+}
+.contact-link:hover { border-color: rgba(232,180,190,0.4); background: rgba(232,180,190,0.05); }
+.link-icon { font-size: 1.3rem; }
+.link-label { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.2rem; }
+.contact-right {
+  background: rgba(255,255,255,0.03); border: 1px solid rgba(232,180,190,0.15); padding: 3rem;
+}
+.contact-right h3 {
+  font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; margin-bottom: 0.5rem; color: var(--cream);
+}
+.contact-right > p { color: var(--muted); font-size: 0.88rem; line-height: 1.7; margin-bottom: 1.8rem; }
+.booking-steps { display: flex; flex-direction: column; gap: 1rem; }
+.booking-step { display: flex; align-items: flex-start; gap: 1rem; }
+.step-num {
+  width: 28px; height: 28px; border-radius: 50%; background: var(--rose); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.75rem; font-weight: 600; flex-shrink: 0;
+}
+.booking-step p { font-size: 0.88rem; color: var(--muted); line-height: 1.6; padding-top: 0.2rem; }
+.booking-step strong { color: var(--cream); }
+
+footer {
+  padding: 2.5rem 5rem;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 700; color: var(--cream); }
+.footer-logo span { color: var(--blush); font-style: italic; }
+footer small { font-size: 0.78rem; color: rgba(253,246,240,0.35); letter-spacing: 0.08em; }
+.footer-ig { font-size: 0.78rem; letter-spacing: 0.12em; text-decoration: none; color: var(--rose); }
+
+/* REVEAL */
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  nav { padding: 1.2rem 2rem; }
+  .nav-links { display: none; }
+  .hero { grid-template-columns: 1fr; }
+  .hero-right { display: none; }
+  .hero-left { padding: 8rem 2rem 4rem; }
+  .about, .contact { grid-template-columns: 1fr; padding: 4rem 2rem; gap: 3rem; }
+  .why, .services, .testimonials, .ig-section { padding: 4rem 2rem; }
+  .why-grid, .testi-grid { grid-template-columns: 1fr; }
+  .services-grid { grid-template-columns: 1fr; }
+  footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem; }
+}
+```
+
+  </style>
+</head>
+<body>
+
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+
+<nav id="navbar">
+  <div class="nav-logo">Riah's <span>Klaws</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#why">Why Mariah</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="https://www.instagram.com/riahsklaws" target="_blank" class="nav-book">Book Now</a>
+</nav>
+
+<!-- HERO -->
+
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-left reveal">
+    <div class="eyebrow">Nail Technician · Mariah Davis</div>
+    <h1>
+      Luxury Nails,
+      <span class="italic">Your Way.</span>
+    </h1>
+    <p class="hero-tagline">
+      Every set is a custom work of art. From flawless acrylics to bold nail art,
+      Mariah Davis crafts nails that turn heads and reflect
+      <em style="color:var(--blush);font-style:italic;">exactly</em> who you are.
+    </p>
+    <div class="hero-actions">
+      <a href="https://www.instagram.com/riahsklaws" target="_blank" class="btn-primary">Book an Appointment</a>
+      <a href="#about" class="btn-ghost">Learn More</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-card reveal">
+      <span class="hero-card-emoji">💅</span>
+      <h3>Precision. Passion. Polish.</h3>
+      <p>Every client deserves to feel beautiful — and Mariah makes sure that happens every single time she picks up a brush.</p>
+      <div class="divider"></div>
+      <div class="hero-stat">
+        <div class="hero-stat-item">
+          <span class="hero-stat-num">100%</span>
+          <span class="hero-stat-label">Custom</span>
+        </div>
+        <div class="hero-stat-item">
+          <span class="hero-stat-num">💎</span>
+          <span class="hero-stat-label">Quality</span>
+        </div>
+        <div class="hero-stat-item">
+          <span class="hero-stat-num">5★</span>
+          <span class="hero-stat-label">Rated</span>
+        </div>
+      </div>
+      <a href="https://www.instagram.com/riahsklaws" target="_blank" class="ig-pill">
+        📸 &nbsp;@riahsklaws
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">Nail Art</span>
+    <span class="marquee-item">Acrylics</span>
+    <span class="marquee-item">Gel Sets</span>
+    <span class="marquee-item">Custom Designs</span>
+    <span class="marquee-item">Riah's Klaws</span>
+    <span class="marquee-item">Book Today</span>
+    <span class="marquee-item">Nail Care</span>
+    <span class="marquee-item">Press-Ons</span>
+    <span class="marquee-item">Nail Art</span>
+    <span class="marquee-item">Acrylics</span>
+    <span class="marquee-item">Gel Sets</span>
+    <span class="marquee-item">Custom Designs</span>
+    <span class="marquee-item">Riah's Klaws</span>
+    <span class="marquee-item">Book Today</span>
+    <span class="marquee-item">Nail Care</span>
+    <span class="marquee-item">Press-Ons</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+
+<section class="about" id="about">
+  <div class="about-visual reveal">
+    <div class="about-card-main">
+      <p class="about-quote">Nails are more than beauty — they're an expression of who you are.</p>
+      <div class="about-attr">— Mariah Davis, Riah's Klaws</div>
+    </div>
+    <div class="about-float-badge">
+      <span>💅</span>
+      <p>Your Nail Plug</p>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="section-label">About Mariah</div>
+    <h2>More Than a Nail Tech —<br><em>She's an Artist</em></h2>
+    <div class="about-text">
+      <p>
+        Mariah Davis, known by her loyal clients as <strong style="color:var(--blush);">@riahsklaws</strong>,
+        is a passionate nail technician whose love for the craft goes far beyond the salon chair.
+        For Mariah, nails are a canvas — a way to help clients express their personality, mood, and
+        style through intricate, one-of-a-kind designs.
+      </p>
+      <p>
+        Mariah started doing nails because she truly believes every person deserves to feel their most
+        confident and beautiful self. She brings that belief into every appointment, taking the time to
+        genuinely understand each client's vision and then bringing it to life with skill, care, and
+        incredible attention to detail.
+      </p>
+      <p>
+        Whether you want something simple and elegant or bold and eye-catching, Mariah has the talent
+        and dedication to make it happen. Her clients keep coming back — not just for the stunning sets,
+        but because Mariah cares deeply about the experience, the relationship, and most of all, the results.
+      </p>
+    </div>
+    <div style="margin-top:2.2rem;">
+      <a href="https://www.instagram.com/riahsklaws" target="_blank" class="btn-primary">See Her Work on Instagram</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHY MARIAH -->
+
+<section class="why" id="why">
+  <div class="why-header reveal">
+    <div class="section-label centered">Why Choose Mariah</div>
+    <h2>The Riah's Klaws <em>Difference</em></h2>
+  </div>
+  <div class="why-grid">
+    <div class="why-card reveal">
+      <span class="why-icon">🎨</span>
+      <h3>Custom Every Time</h3>
+      <p>No cookie-cutter sets here. Mariah designs each nail set from scratch, tailored specifically to your vision, shape, length, and style — no two sets are ever the same.</p>
+    </div>
+    <div class="why-card reveal">
+      <span class="why-icon">💎</span>
+      <h3>Premium Quality</h3>
+      <p>Mariah uses only top-quality products to ensure your nails look stunning and actually last. You deserve the best, and that's exactly what she delivers — every single time.</p>
+    </div>
+    <div class="why-card reveal">
+      <span class="why-icon">🤝</span>
+      <h3>You're Always Heard</h3>
+      <p>Mariah takes the time to really listen. Your input matters from the very first message to the final coat — she won't stop until you are completely obsessed with your set.</p>
+    </div>
+    <div class="why-card reveal">
+      <span class="why-icon">✨</span>
+      <h3>Passion-Driven Work</h3>
+      <p>Nails are Mariah's art form and her calling. That genuine love and enthusiasm shows in every set she creates — you can feel the difference when someone truly loves what they do.</p>
+    </div>
+    <div class="why-card reveal">
+      <span class="why-icon">⏰</span>
+      <h3>Reliable & Professional</h3>
+      <p>Mariah respects your time and shows up ready. You can count on a consistent, professional experience that leaves you walking away feeling like the queen you are.</p>
+    </div>
+    <div class="why-card reveal">
+      <span class="why-icon">📲</span>
+      <h3>Easy to Book</h3>
+      <p>No complicated booking systems. Just DM her on Instagram @riahsklaws and she'll take care of everything. Simple, easy, and stress-free — just like the experience itself.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+
+<section class="services" id="services">
+  <div class="services-header reveal">
+    <div class="section-label">What She Offers</div>
+    <h2>Services by <em>Riah's Klaws</em></h2>
+  </div>
+  <div class="services-grid">
+    <div class="service-item reveal">
+      <div class="service-num">01</div>
+      <div class="service-info">
+        <h4>Acrylic Full Sets</h4>
+        <p>Custom-shaped acrylic sets with any length, shape, or design. Long-lasting, durable, and completely personalized to your style and personality.</p>
+      </div>
+    </div>
+    <div class="service-item reveal">
+      <div class="service-num">02</div>
+      <div class="service-info">
+        <h4>Gel Sets & Overlays</h4>
+        <p>Glossy, flexible gel applications for a natural feel with a high-shine finish. Perfect for everyday elegance that still turns heads.</p>
+      </div>
+    </div>
+    <div class="service-item reveal">
+      <div class="service-num">03</div>
+      <div class="service-info">
+        <h4>Nail Art & Custom Designs</h4>
+        <p>From intricate hand-painted details to rhinestones, chrome, and 3D elements — if you can dream it, Mariah can absolutely create it.</p>
+      </div>
+    </div>
+    <div class="service-item reveal">
+      <div class="service-num">04</div>
+      <div class="service-info">
+        <h4>Fills & Maintenance</h4>
+        <p>Keep your set looking fresh with professional fills. Regular maintenance to keep your nails healthy and flawless between full appointments.</p>
+      </div>
+    </div>
+    <div class="service-item reveal">
+      <div class="service-num">05</div>
+      <div class="service-info">
+        <h4>Safe Nail Removal</h4>
+        <p>Gentle, professional removal to protect the health of your natural nails. No damage, no rushing — your nail health comes first.</p>
+      </div>
+    </div>
+    <div class="service-item reveal">
+      <div class="service-num">06</div>
+      <div class="service-info">
+        <h4>Special Occasion Sets</h4>
+        <p>Homecoming, prom, birthday, wedding — Mariah creates statement sets for your most important moments. Your nails will be as unforgettable as the day itself.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+
+<section class="testimonials">
+  <div class="testimonials-header reveal">
+    <div class="section-label centered">Client Love</div>
+    <h2>What They're <em>Saying</em></h2>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card reveal">
+      <div class="testi-stars">★★★★★</div>
+      <blockquote>"Mariah always goes above and beyond. My nails never looked this good before her. She listened to exactly what I wanted and delivered something even better than I imagined."</blockquote>
+      <div class="testi-name">— Loyal Client</div>
+    </div>
+    <div class="testi-card reveal">
+      <div class="testi-stars">★★★★★</div>
+      <blockquote>"I always leave feeling like a brand new person. The quality is unmatched and she genuinely cares about making sure you're completely happy. I won't go anywhere else."</blockquote>
+      <div class="testi-name">— Regular Client</div>
+    </div>
+    <div class="testi-card reveal">
+      <div class="testi-stars">★★★★★</div>
+      <blockquote>"Riah's Klaws is the real deal. The attention to detail is absolutely incredible. She's not just doing nails — she's creating art. My friends always ask who did my nails!"</blockquote>
+      <div class="testi-name">— Satisfied Client</div>
+    </div>
+  </div>
+</section>
+
+<!-- INSTAGRAM CTA -->
+
+<section class="ig-section">
+  <div class="reveal">
+    <div class="section-label centered">Follow the Journey</div>
+    <h2>See the <em>Latest Sets</em></h2>
+    <p>Follow Mariah on Instagram to see her most recent work, get inspired for your next set, and book your appointment directly through her page.</p>
+    <a href="https://www.instagram.com/riahsklaws" target="_blank" class="ig-big-btn">
+      📸 &nbsp;Follow @riahsklaws on Instagram
+    </a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+
+<section class="contact" id="contact">
+  <div class="reveal">
+    <div class="section-label">Let's Connect</div>
+    <h2>Ready for Your <em>Dream Set?</em></h2>
+    <p>Booking with Mariah is simple — reach out on Instagram and she'll get you set up. She can't wait to create something beautiful for you.</p>
+    <a href="https://www.instagram.com/riahsklaws" target="_blank" class="contact-link">
+      <span class="link-icon">📸</span>
+      <div>
+        <div class="link-label">Instagram</div>
+        @riahsklaws
+      </div>
+    </a>
+  </div>
+
+  <div class="contact-right reveal">
+    <h3>How to Book</h3>
+    <p>Getting your nails done by Mariah is quick and easy. Just follow these simple steps:</p>
+    <div class="booking-steps">
+      <div class="booking-step">
+        <div class="step-num">1</div>
+        <p><strong>Follow @riahsklaws</strong> on Instagram to see her latest work and stay in the loop.</p>
+      </div>
+      <div class="booking-step">
+        <div class="step-num">2</div>
+        <p><strong>Send her a DM</strong> with your desired style, shape, and any inspo photos you love.</p>
+      </div>
+      <div class="booking-step">
+        <div class="step-num">3</div>
+        <p><strong>Pick your date</strong> and confirm your appointment. Mariah handles everything from there.</p>
+      </div>
+      <div class="booking-step">
+        <div class="step-num">4</div>
+        <p><strong>Show up and slay.</strong> Walk away with the most stunning nails of your life. 💅</p>
+      </div>
+    </div>
+    <div style="margin-top:2rem;">
+      <a href="https://www.instagram.com/riahsklaws" target="_blank" class="btn-primary" style="display:inline-block;width:100%;text-align:center;">DM to Book Now</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+  <div class="footer-logo">Riah's <span>Klaws</span></div>
+  <small>© 2025 Mariah Davis · All Rights Reserved</small>
+  <a href="https://www.instagram.com/riahsklaws" target="_blank" class="footer-ig">@riahsklaws</a>
+</footer>
+
+<script>
+  // Cursor
+  const dot = document.getElementById('cursorDot');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+  (function animCursor() {
+    dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+    rx += (mx - rx) * 0.15; ry += (my - ry) * 0.15;
+    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+    requestAnimationFrame(animCursor);
+  })();
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => ring.classList.add('hovering'));
+    el.addEventListener('mouseleave', () => ring.classList.remove('hovering'));
+  });
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  revealEls.forEach(el => obs.observe(el));
+
+  // Nav scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (window.scrollY > 60) {
+      nav.style.background = 'rgba(28,15,20,0.97)';
+      nav.style.borderBottom = '1px solid rgba(232,180,190,0.1)';
+    } else {
+      nav.style.background = '';
+      nav.style.borderBottom = '';
+    }
+  });
+</script>
+
+</body>
+</html>
